@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Mapa Mental Interactivo</title>
+    <style>
+        body {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            background-color: #f4f4f4;
+            font-family: Arial, sans-serif;
+        }
+        .map-container {
+            position: relative;
+            width: 800px;
+            height: 600px;
+        }
+        .node {
+            position: absolute;
+            padding: 10px;
+            background: white;
+            border-radius: 10px;
+            box-shadow: 2px 2px 10px rgba(0, 0, 0, 0.2);
+            cursor: pointer;
+            transition: transform 0.3s;
+        }
+        .node:hover {
+            transform: scale(1.1);
+        }
+        .hidden {
+            display: none;
+        }
+    </style>
+</head>
+<body>
+    <div class="map-container">
+        <div class="node" style="top: 50px; left: 300px;" onclick="toggleNode('nodo1')">
+            <img src="img1.jpg" alt="Nodo Central" width="100">
+        </div>
+        <div id="nodo1" class="node hidden" style="top: 200px; left: 100px;" onclick="toggleNode('nodo2')">
+            <img src="img2.jpg" alt="Nodo 1" width="80">
+        </div>
+        <div id="nodo2" class="node hidden" style="top: 200px; left: 500px;">
+            <img src="img3.jpg" alt="Nodo 2" width="80">
+        </div>
+    </div>
+
+    <script>
+        function toggleNode(id) {
+            var node = document.getElementById(id);
+            node.classList.toggle("hidden");
+        }
+    </script>
+</body>
+</html>
