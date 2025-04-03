@@ -1,58 +1,191 @@
 <!DOCTYPE html>
-<html lang="es">
+<html lang="en">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Mapa Mental Interactivo</title>
+    <title>Interactive Image Gallery</title>
     <style>
+        /* Reset and base styles */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
         body {
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            height: 100vh;
-            background-color: #f4f4f4;
-            font-family: Arial, sans-serif;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background-color: #ffffff;
+            color: #333;
+            line-height: 1.6;
         }
-        .map-container {
+        
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 2rem;
+        }
+        
+        h1 {
+            text-align: center;
+            color: #11254d;
+            font-size: 2.5rem;
+            margin-bottom: 3rem;
+        }
+        
+        /* Gallery styles */
+        .gallery {
+            display: grid;
+            grid-template-columns: repeat(1, 1fr);
+            gap: 1.5rem;
+        }
+        
+        @media (min-width: 768px) {
+            .gallery {
+                grid-template-columns: repeat(3, 1fr);
+            }
+        }
+        
+        .image-card {
             position: relative;
-            width: 800px;
-            height: 600px;
-        }
-        .node {
-            position: absolute;
-            padding: 10px;
-            background: white;
-            border-radius: 10px;
-            box-shadow: 2px 2px 10px rgba(0, 0, 0, 0.2);
+            border-radius: 8px;
+            overflow: hidden;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+            transition: all 0.3s ease;
             cursor: pointer;
-            transition: transform 0.3s;
         }
-        .node:hover {
-            transform: scale(1.1);
+        
+        .image-card:hover {
+            box-shadow: 0 10px 15px rgba(0, 0, 0, 0.2);
+            transform: translateY(-5px);
         }
-        .hidden {
-            display: none;
+        
+        .image-container {
+            position: relative;
+            aspect-ratio: 3/2;
+        }
+        
+        .image-container img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+        
+        .popup {
+            position: absolute;
+            inset: 0;
+            background: linear-gradient(to top, rgba(17, 37, 77, 0.9), rgba(31, 60, 107, 0.7));
+            display: flex;
+            flex-direction: column;
+            justify-content: flex-end;
+            padding: 1.5rem;
+            opacity: 0;
+            transform: translateY(10px);
+            transition: all 0.3s ease;
+            pointer-events: none;
+        }
+        
+        .image-card:hover .popup {
+            opacity: 1;
+            transform: translateY(0);
+            pointer-events: auto;
+        }
+        
+        .popup h3 {
+            color: white;
+            font-size: 1.5rem;
+            margin-bottom: 0.5rem;
+        }
+        
+        .popup p {
+            color: #dce6f2;
+            margin-bottom: 1rem;
+        }
+        
+        .popup-link {
+            display: inline-flex;
+            align-items: center;
+            gap: 0.5rem;
+            background-color: #2d5389;
+            color: white;
+            padding: 0.5rem 1rem;
+            border-radius: 4px;
+            text-decoration: none;
+            transition: background-color 0.2s;
+            width: fit-content;
+        }
+        
+        .popup-link:hover {
+            background-color: #3a6aa7;
+        }
+        
+        .icon {
+            width: 16px;
+            height: 16px;
         }
     </style>
 </head>
 <body>
-    <div class="map-container">
-        <div class="node" style="top: 50px; left: 300px;" onclick="toggleNode('nodo1')">
-            <img src="img1.jpg" alt="Nodo Central" width="100">
-        </div>
-        <div id="nodo1" class="node hidden" style="top: 200px; left: 100px;" onclick="toggleNode('nodo2')">
-            <img src="img2.jpg" alt="Nodo 1" width="80">
-        </div>
-        <div id="nodo2" class="node hidden" style="top: 200px; left: 500px;">
-            <img src="img3.jpg" alt="Nodo 2" width="80">
+    <div class="container">
+        <h1>Interactive Image Gallery</h1>
+        
+        <div class="gallery">
+            <!-- Image 1 -->
+            <div class="image-card">
+                <div class="image-container">
+                    <img src="https://placehold.co/600x400/e9ecef/11254d?text=Image+1" alt="Corporate Image 1">
+                    <div class="popup">
+                        <h3>Innovation</h3>
+                        <p>Discover our innovative solutions</p>
+                        <a href="https://www.roche.com.co/" target="_blank" class="popup-link">
+                            Visit Site
+                            <svg class="icon" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                                <path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"></path>
+                                <polyline points="15 3 21 3 21 9"></polyline>
+                                <line x1="10" y1="14" x2="21" y2="3"></line>
+                            </svg>
+                        </a>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- Image 2 -->
+            <div class="image-card">
+                <div class="image-container">
+                    <img src="https://placehold.co/600x400/e9ecef/11254d?text=Image+2" alt="Corporate Image 2">
+                    <div class="popup">
+                        <h3>Excellence</h3>
+                        <p>Committed to excellence in everything we do</p>
+                        <a href="https://www.roche.com.co/" target="_blank" class="popup-link">
+                            Visit Site
+                            <svg class="icon" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                                <path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"></path>
+                                <polyline points="15 3 21 3 21 9"></polyline>
+                                <line x1="10" y1="14" x2="21" y2="3"></line>
+                            </svg>
+                        </a>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- Image 3 -->
+            <div class="image-card">
+                <div class="image-container">
+                    <img src="https://placehold.co/600x400/e9ecef/11254d?text=Image+3" alt="Corporate Image 3">
+                    <div class="popup">
+                        <h3>Partnership</h3>
+                        <p>Building lasting partnerships for success</p>
+                        <a href="https://www.roche.com.co/" target="_blank" class="popup-link">
+                            Visit Site
+                            <svg class="icon" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                                <path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"></path>
+                                <polyline points="15 3 21 3 21 9"></polyline>
+                                <line x1="10" y1="14" x2="21" y2="3"></line>
+                            </svg>
+                        </a>
+                    </div>
+                </div>
+            </div>
         </div>
     </div>
-
-    <script>
-        function toggleNode(id) {
-            var node = document.getElementById(id);
-            node.classList.toggle("hidden");
-        }
-    </script>
 </body>
 </html>
